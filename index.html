@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920">
+  <title>Home Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #a8cce0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .scene {
+      position: relative;
+      width: min(100vw, 177.78vh);
+      aspect-ratio: 16 / 9;
+      /* 切换时淡入淡出 */
+      transition: opacity 0.3s ease;
+    }
+
+    .scene.hidden {
+      display: none;
+    }
+
+    .scene .bg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .btn {
+      position: absolute;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      transition: transform 0.15s ease;
+      transform-origin: center;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      transform: scale(1.12);
+    }
+
+    .btn:active {
+      transform: scale(0.94);
+      transition: transform 0.08s ease;
+    }
+
+    .btn img {
+      display: block;
+      width: 100%;
+    }
+
+    /* ── Home Page buttons ── */
+
+    /* btn_01: yellow "nǐ hǎo" speech bubble */
+    #btn-01 {
+      left: 56%;
+      top: 16%;
+      width: 26%;
+    }
+
+    /* btn_02: green logo — top right */
+    #btn-02-home {
+      right: 2%;
+      top: 2%;
+      width: 6.5%;
+    }
+
+    /* ── Page 2 buttons ── */
+
+    /* Transparent back button — covers existing ◀ in 02.jpg */
+    #btn-back {
+      left: 5.5%;
+      top: 3.5%;
+      width: 9%;
+      opacity: 0;
+    }
+
+    /* btn_02: green logo — top right */
+    #btn-02-p2 {
+      right: 2%;
+      top: 2%;
+      width: 6.5%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ Scene 1: Home Page ══ -->
+  <div class="scene" id="scene-home">
+    <img class="bg" src="btn/01.jpg" alt="">
+
+    <button id="btn-01" class="btn" onclick="goTo('scene-p2')">
+      <img src="btn/btn_01.png" alt="nǐ hǎo">
+    </button>
+
+    <div id="btn-02-home" class="btn">
+      <img src="btn/btn_02.png" alt="">
+    </div>
+  </div>
+
+  <!-- ══ Scene 2: Page 2 ══ -->
+  <div class="scene hidden" id="scene-p2">
+    <img class="bg" src="btn/02.jpg" alt="">
+
+    <!-- Transparent clickable area over the existing ◀ in background -->
+    <button id="btn-back" class="btn" onclick="goTo('scene-home')">
+      <img src="btn/btn_preview_green.png" alt="Back">
+    </button>
+
+    <div id="btn-02-p2" class="btn">
+      <img src="btn/btn_02.png" alt="">
+    </div>
+  </div>
+
+  <script>
+    function goTo(sceneId) {
+      document.querySelectorAll('.scene').forEach(s => s.classList.add('hidden'));
+      document.getElementById(sceneId).classList.remove('hidden');
+    }
+  </script>
+
+</body>
+</html>
